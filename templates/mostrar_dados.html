@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados por Ano</title>
+    {% load static %} <!-- Adicione esta linha para carregar o static -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Dados de {{ ano_escolhido }}</h1>
+
+        <!-- Botão para download dos dados filtrados -->
+        <a href="{% url 'download_dados' %}?ano={{ ano_escolhido }}" class="download-button">Baixar Dados de {{ ano_escolhido }}</a>
+
+        <!-- Tabela para exibir os dados filtrados -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Ano</th>
+                    <th>Classificação da Atividade</th>
+                    <th>Sigla do Estado</th>
+                    <th>Variável</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dado in dados %}
+                    <tr>
+                        <td>{{ dado.ano }}</td>
+                        <td>{{ dado.classificacao_atividade }}</td>
+                        <td>{{ dado.sigla_estado }}</td>
+                        <td>{{ dado.variavel }}</td>
+                        <td>{{ dado.quantidade }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
